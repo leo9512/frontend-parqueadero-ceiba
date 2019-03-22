@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.example-form {
+    min-width: 150px;
+    max-width: 180px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  h1 { 
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 30%;
+    margin-right: auto;
+    font-weight: bold;
+    text-align: initial;
+  }
+  h2 { 
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    text-align: initial;
+  }
+  .table {
+    width: 90%;
+  }

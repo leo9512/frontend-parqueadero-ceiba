@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+      <div class="col-9">
+      <h1>PARKING</h1>
+      <table class="table table-striped">
+        <thead>
+          <th>Id</th>
+          <th>Data Arrived</th>
+          <th>Vehicle Type</th>
+          <th>License Plate</th>
+          <th>Engine</th>
+          <th>*</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of vehiclesParking">
+            <td>{{item.id}}</td>
+            <td>{{item.vehicleDataArrived}}</td>
+            <Td>{{item.vehicleType}}</Td>
+            <td>{{item.licensePlate}}</td>
+            <td>{{item.engine}}</td>
+            <td>
+              <button (click)="updateVehicleParking(item.id)" class="btn btn-primary">Let go</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3">
+      <h2>Add new vehicle</h2>
+      <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="License plate" [(ngModel)]=addVehicleParking.licensePlate name="licensePlate">
+          </mat-form-field>
+      </form>
+      <form>
+        <mat-form-field>
+          <mat-label>Vehicle type</mat-label>
+          <mat-select [(ngModel)]="addVehicleParking.vehicleType" name="vehicletype">
+            <mat-option *ngFor="let vehicleType of vehiclesType" [value]="vehicleType">
+              {{vehicleType}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Vehicle engine" [(ngModel)]=addVehicleParking.engine name="engine" [type]="type" >
+          </mat-form-field>
+      </form>
+      <button (click)="addVehicle()" class="btn btn-primary">Add vehicle</button>
+    </div>
+  </div>
+</div>
