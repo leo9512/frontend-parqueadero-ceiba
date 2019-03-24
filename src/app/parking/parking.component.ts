@@ -1,6 +1,5 @@
 import { ParkingService } from './../service/parking.service';
 import { Component, OnInit } from '@angular/core';
-import { from } from 'rxjs';
 
 @Component({
   selector: 'app-parking',
