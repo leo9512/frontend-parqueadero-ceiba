@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -11,13 +12,14 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MyDialogComponent } from './my-dialog/my-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ParkingComponent
+    ParkingComponent,
+    MyDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -28,6 +30,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule
+  ],
+  entryComponents:[
+    MyDialogComponent
   ],
   providers: [ParkingService],
   bootstrap: [AppComponent]

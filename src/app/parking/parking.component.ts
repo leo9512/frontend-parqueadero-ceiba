@@ -1,3 +1,5 @@
+import { MyDialogComponent } from './../my-dialog/my-dialog.component';
+import { MatDialog } from '@angular/material';
 import { ParkingService } from './../service/parking.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,8 +14,9 @@ export class ParkingComponent implements OnInit {
   vehiclesParking: any;
   vehiclesType: any = ["CAR", "MOTORCYCLE"];
   type="number"
+  message:String;
 
-  constructor(private parkingService:ParkingService) {
+  constructor(private parkingService:ParkingService, public dialog:MatDialog) {
       this.getVehicles();
    }
    getVehicles(){
@@ -21,8 +24,8 @@ export class ParkingComponent implements OnInit {
        this.vehiclesParking=result
      },
      err =>{
-     console.log("Acá esta el error")
-     console.log(JSON.stringify(err))})
+      this.openDialog(err.error.message);
+      console.log(JSON.stringify(err))})
    }
 
   ngOnInit() {
@@ -30,10 +33,16 @@ export class ParkingComponent implements OnInit {
 
   updateVehicleParking(parkingControlID){
     this.parkingService.updateVehicle(parkingControlID).subscribe(result =>{
+      this.message = "The "+result.vehicleType+" with license plate "+ result.licensePlate+
+      " entered the "+ result.vehicleDataArrived+" and left the "+result.vehicleDataOut+
+      ", this has a cost of $"+result.valueToPay+ " for "+result.totalHours+" hours.";
+      this.openDialog(this.message);
       this.getVehicles();
+      this.message="";
     },
-    err =>
-    console.log(JSON.stringify(err)))
+    err =>{
+    this.openDialog(err.error.message);
+    })
   }
 
   addVehicle(){
@@ -41,8 +50,20 @@ export class ParkingComponent implements OnInit {
       this.getVehicles();
       this.addVehicleParking={vehicleType: '', licensePlate: '', Engine: ''}
     },
-    err =>
-    console.log(JSON.stringify(err)))
+    err =>{
+    this.openDialog(err.error.message);
+  })
     
+  }
+
+  openDialog(msg:String): void {
+    const dialogRef = this.dialog.open(MyDialogComponent, {
+      data:{
+        message:msg
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }
