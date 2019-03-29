@@ -19,19 +19,26 @@ describe('workspace-project App', () => {
     expect(page.getSubTitleText()).toEqual('Add new vehicle');
   });
 
-  it('should add one and two', function() {
+  it('Add new vehicle', function() {
     page.navigateTo();
-    let initialRows = protractor.element.all(protractor.by.xpath('.//*[@class="ng-star-inserted"]')).count();
 
     protractor.element(protractor.by.name('licensePlate')).sendKeys("PWE342");
     protractor.element(protractor.by.name('vehicletype')).sendKeys("MOTORCYCLE");
     protractor.element(protractor.by.name('engine')).sendKeys("200");
 
     protractor.element(protractor.by.id('addVehicle')).click();
-    let finalRows = protractor.element.all(protractor.by.xpath('.//*[@class="ng-star-inserted"]')).count();
-    expect(initialRows).toEqual(finalRows);
-    browser.pause();
+    let finalRow = protractor.element(protractor.by.xpath('/html/body/app-root/app-parking/div/div/div[1]/table/tbody/tr[1]/td[4]'));
+    expect(finalRow.getText()).toBe("PWE342");
     });
+
+    it('Let go vehicle', function() {
+      page.navigateTo();  
+      protractor.element(protractor.by.xpath('/html/body/app-root/app-parking/div/div/div[1]/table/tbody/tr[1]/td[6]/button')).click();
+
+      let result = protractor.element(protractor.by.xpath('/html/body/div[2]/div[2]/div/mat-dialog-container/app-my-dialog/div[1]/p'));
+      expect(result.getText()).toContain("MOTORCYCLE with license plate PWE342");
+      
+      });
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
